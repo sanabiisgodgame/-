@@ -73,3 +73,5 @@
 | 2026-04-15 | 해초농장 v8.5 무한 스탯 + 오프라인 보상 | 해초농장_v8.5.html | getDynamicVal 도입(배열 초과시 선형/기하급수 외삽), 모든 getter 교체(AUTO_I/CD_M/PRICE_M/BATTLE 등), autoAcc while 루프 기존 유지 확인, 노드 상한 24개로 확대 |
 | 2026-04-14 | 해초농장 v8.4 모바일 대응 | 해초농장_v8.4.html | @media 640px 미디어쿼리, 하단 4탭(인벤토리/로봇스탯/유물), 팜 상단고정+48vh, 노드 80px, 상점 풀스크린, 터치 버튼 44px 이상 |
 | 2026-04-09 | 해초농장 v8.3 다기능 개선 | 해초농장_v8.3.html | 아이언↔차원 효과 스왑, 로봇=노드 Plan A, desc undefined 클램프, user-select:none, 등급배너 비차단, 유물포인트 팝업 위치 개선, 설정버튼 볼륨 슬라이더, 가독성·텍스트잘림 개선 |
+
+| 2026-05-06 | [ChatGPT] 해초농장 배경 연출 개선 | games/해초농장_v8.6(Claude).html | #farm 3단 배경(Base/Mid/Top) 추가, 모바일(768px) 파티클 밀도 절반 축소, pointer-events:none+z-index 정리로 상호작용 충돌 방지 |

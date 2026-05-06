@@ -117,21 +117,59 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 
 /* ── FARM ── */
 #farm{
-  background:radial-gradient(ellipse at 50% 80%,#040d1c,#020810);
+  background:linear-gradient(180deg,#3dbfd1 0%,#1f6f95 42%,#0b2148 100%);
   border-left:3px solid var(--br);border-right:3px solid var(--br);
   position:relative;overflow:hidden;display:flex;flex-direction:column;
 }
-#uwbg{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+#farm-bg-mid,#farm-bg-top{
+  position:absolute;inset:0;pointer-events:none;
+}
+#farm-bg-mid{
+  z-index:0;
+  background:
+    radial-gradient(58% 36% at 20% 8%,rgba(171,248,255,0.26),rgba(171,248,255,0) 68%),
+    radial-gradient(52% 30% at 78% 12%,rgba(135,234,255,0.2),rgba(135,234,255,0) 72%),
+    radial-gradient(40% 25% at 52% 18%,rgba(121,217,249,0.16),rgba(121,217,249,0) 72%);
+}
+#farm-bg-top{
+  z-index:1;
+  overflow:hidden;
+  opacity:0.6;
+  background-image:
+    radial-gradient(circle at 12% 88%,rgba(197,245,255,0.55) 0 1.4px,transparent 1.9px),
+    radial-gradient(circle at 43% 81%,rgba(209,248,255,0.42) 0 1.2px,transparent 1.8px),
+    radial-gradient(circle at 74% 92%,rgba(196,239,255,0.44) 0 1.2px,transparent 1.8px),
+    radial-gradient(circle at 90% 83%,rgba(181,230,255,0.34) 0 1px,transparent 1.7px);
+  background-size:210px 210px,240px 240px,190px 190px,260px 260px;
+  animation:farmDustRise 12s ease-in-out infinite;
+}
+#farm-bg-top::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 22% 95%,rgba(198,246,255,0.35) 0 1.1px,transparent 1.7px),
+    radial-gradient(circle at 66% 88%,rgba(207,248,255,0.3) 0 1px,transparent 1.6px),
+    radial-gradient(circle at 85% 78%,rgba(223,252,255,0.28) 0 0.9px,transparent 1.5px);
+  background-size:180px 180px,220px 220px,200px 200px;
+  opacity:0.65;
+  animation:farmDustRiseAlt 9s linear infinite;
+}
+@keyframes farmDustRise{0%{opacity:0.35;transform:translateY(0)}50%{opacity:0.65}100%{opacity:0.3;transform:translateY(-22px)}}
+@keyframes farmDustRiseAlt{0%{opacity:0.25;transform:translateY(0)}50%{opacity:0.52}100%{opacity:0.2;transform:translateY(-28px)}}
+#uwbg{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
 .uw-ray{position:absolute;top:0;width:4px;background:linear-gradient(180deg,transparent,rgba(0,200,120,0.05),transparent);animation:uwray linear infinite;}
 @keyframes uwray{0%{opacity:0}30%{opacity:1}80%{opacity:0.3}100%{opacity:0;transform:translateY(15px)}}
 .bub-bg{position:absolute;border-radius:50%;border:1px solid rgba(0,200,150,0.18);background:radial-gradient(circle at 35% 35%,rgba(0,255,180,0.05),transparent);animation:bubr linear infinite;pointer-events:none;}
 @keyframes bubr{0%{opacity:0;transform:translateY(0) translateX(0)}10%{opacity:0.5}90%{opacity:0.08}100%{opacity:0;transform:translateY(-105vh) translateX(var(--dx))}}
+@media (max-width:768px){
+  #farm-bg-top{animation-duration:14s;opacity:0.45;background-size:320px 320px,360px 360px;}
+  #farm-bg-top::before{display:none;}
+}
 .kelp-deco{position:absolute;bottom:0;animation:kwave ease-in-out infinite;pointer-events:none;opacity:0.18;font-size:24px;}
 @keyframes kwave{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
-#particle-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:20;}
-#farm-hd{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:8px;padding:7px;border-bottom:3px solid var(--br);background:rgba(4,8,18,0.92);flex-shrink:0;}
+#particle-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;}
+#farm-hd{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:8px;padding:7px;border-bottom:3px solid var(--br);background:rgba(4,8,18,0.92);flex-shrink:0;}
 #farm-hd span{font-family:var(--Fp);font-size:9px;color:var(--G);letter-spacing:3px;text-shadow:0 0 10px var(--G);}
-#nodes-grid{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;padding:12px;flex:1;align-content:center;}
+#nodes-grid{position:relative;z-index:3;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;padding:12px;flex:1;align-content:center;}
 
 /* NODE */
 .node{width:115px;height:115px;position:relative;cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:center;flex-direction:column;border:4px solid;transition:transform 0.08s;box-shadow:4px 4px 0 #000;}
@@ -666,6 +704,8 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;background:var(--G);b
 
   <!-- 팜 -->
   <div id="farm">
+    <div id="farm-bg-mid"></div>
+    <div id="farm-bg-top"></div>
     <div id="uwbg"></div>
     <canvas id="particle-canvas"></canvas>
     <div id="farm-hd"><span>— 해초 농장 —</span></div>
